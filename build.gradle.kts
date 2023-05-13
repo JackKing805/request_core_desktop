@@ -22,7 +22,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    compileOnly("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     compileOnly("com.github.JackKing805:RtCore:0.7.1")
 }
