@@ -16,13 +16,23 @@ object Core {
         )
     )
 
+    //先保存，调用init的时再初始化
+    private val injects = mutableListOf<Class<*>>()
+    private var isInit = false
+
 
     fun init(more:MutableList<Class<*>>){
-        inject(more)
+        if (isInit){
+            return
+        }
+        isInit = true
+        more.addAll(injects)
+        injects.clear()
+        InjectFactory.inject(more)
     }
 
     fun inject(more:MutableList<Class<*>>){
-        InjectFactory.inject(more)
+        injects.addAll(more)
     }
 
     fun setRtConfig(rtConfig: RtConfig){
