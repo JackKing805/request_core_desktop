@@ -1,5 +1,6 @@
 package com.cool.request_core.core.utils
 
+import com.cool.request_core.GsonUtils
 import com.cool.request_core.core.constants.FileType
 import com.cool.request_core.core.exception.IllRedirectProtocolException
 import com.jerry.rt.core.http.pojo.Response

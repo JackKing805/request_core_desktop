@@ -5,7 +5,7 @@ import com.cool.request_core.base.annotations.Configuration
 import com.cool.request_core.base.bean.ControllerReferrer
 import com.cool.request_core.base.bean.ResourceReferrer
 import com.cool.request_core.base.interfaces.IConfig
-import com.cool.request_core.core.utils.reflect.ReflectUtils
+import com.cool.request_core.ReflectUtils
 import com.cool.request_core.core.Core
 import com.cool.request_core.core.utils.reflect.InjectUtils
 import com.jerry.rt.core.http.Client

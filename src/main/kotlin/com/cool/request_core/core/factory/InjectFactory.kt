@@ -12,7 +12,7 @@ import com.cool.request_core.core.exception.IllPathException
 import com.cool.request_core.core.exception.InitErrorException
 import com.cool.request_core.core.extensions.getJustPath
 import com.cool.request_core.core.extensions.isBasicType
-import com.cool.request_core.core.utils.reflect.ReflectUtils
+import com.cool.request_core.ReflectUtils
 import java.lang.reflect.AnnotatedElement
 import java.lang.reflect.Method
 import java.util.regex.Pattern
@@ -129,10 +129,6 @@ internal object InjectFactory {
         }
         val registers = getConfigRegisters()
 
-        registers.forEach {
-            it.instance.onCreate()
-        }
-
         configurations.forEach { o ->
             registers.forEach { i ->
                 if (ReflectUtils.isSameClass(
@@ -143,6 +139,10 @@ internal object InjectFactory {
                     i.instance.init(o.annotation, o.instance)
                 }
             }
+        }
+
+        registers.forEach {
+            it.instance.onCreate()
         }
     }
 

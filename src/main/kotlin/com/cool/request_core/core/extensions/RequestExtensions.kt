@@ -1,8 +1,8 @@
 package com.cool.request_core.core.extensions
 
-import com.cool.request_core.core.utils.JavaUtils
+import com.cool.request_core.GsonUtils
+import com.cool.request_core.JavaUtils
 import com.cool.request_core.core.delegator.RequestController
-import com.cool.request_core.core.utils.GsonUtils
 import com.cool.request_core.core.exception.NotSupportPathParamsTypeException
 import com.cool.request_core.core.exception.PathParamsConvertErrorException
 import com.cool.request_core.core.factory.ControllerMapper

@@ -1,4 +1,4 @@
-package com.cool.request_core.core.utils;
+package com.cool.request_core;
 
 public class JavaUtils {
     public static String getSamePath(String url1, String url2) {

@@ -7,7 +7,7 @@ plugins {
 
 }
 
-val vv = "0.0.1"
+val vv = "0.0.3"
 
 
 group = "com.cool"
@@ -24,7 +24,10 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation("com.google.code.gson:gson:2.10.1")
 
-    compileOnly("com.github.JackKing805:RtCore:0.7.1")
+    compileOnly("com.github.JackKing805:RtCore:0.7.4")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+//    implementation("com.github.JackKing805:RtCore:0.7.1")//todo remove
+//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")//todo remove
 }
 
 tasks.test {

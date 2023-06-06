@@ -1,5 +1,6 @@
 package com.cool.request_core.core.utils.reflect
 
+import com.cool.request_core.ReflectUtils
 import com.cool.request_core.base.annotations.Inject
 import com.cool.request_core.core.exception.InvokeMethodException
 import com.cool.request_core.core.factory.InjectFactory
