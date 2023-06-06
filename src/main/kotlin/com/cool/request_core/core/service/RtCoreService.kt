@@ -11,6 +11,7 @@ import com.jerry.rt.core.http.Client
 import com.jerry.rt.core.http.interfaces.ClientListener
 import com.jerry.rt.core.http.pojo.Request
 import com.jerry.rt.core.http.pojo.Response
+import com.jerry.rt.core.http.pojo.RtClient
 import com.jerry.rt.interfaces.RtCoreListener
 
 internal object RtCoreService {
@@ -43,32 +44,28 @@ internal object RtCoreService {
                         "onException:${exception.toString()}".log()
                     }
 
-                    override suspend fun onMessage(
-                        client: Client,
-                        request: Request,
-                        response: Response
-                    ) {
+                    override fun onMessage(client: RtClient, request: Request, response: Response) {
                         "onMessage".log()
                         RequestDelegator.dispatcher(request,response)
                     }
 
-                    override fun onRtClientIn(client: Client,request: Request, response: Response) {
+                    override fun onRtClientIn(client: RtClient, request: Request, response: Response) {
                         "onRtClientIn".log()
                         RequestDelegator.onRtIn(client,request,response)
                     }
 
-                    override fun onRtClientOut(client: Client) {
+                    override fun onRtClientOut(client: RtClient) {
                         "onRtClientOut".log()
                         RequestDelegator.onRtOut(client)
                     }
 
-                    override suspend fun onRtHeartbeat(client: Client) {
+                    override fun onRtHeartbeat(client: RtClient) {
                         "onRtHeartbeat".log()
                     }
 
-                    override suspend fun onRtMessage(request: Request, response: Response) {
+                    override fun onRtMessage(client: RtClient, request: Request, response: Response) {
                         "onRtMessage".log()
-                        RequestDelegator.onRtMessage(request,response)
+                        RequestDelegator.onRtMessage(client,request,response)
                     }
                 })
             }

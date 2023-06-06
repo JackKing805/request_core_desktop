@@ -27,6 +27,7 @@ import com.jerry.rt.core.http.interfaces.ISession
 import com.jerry.rt.core.http.pojo.ProtocolPackage
 import com.jerry.rt.core.http.pojo.Request
 import com.jerry.rt.core.http.pojo.Response
+import com.jerry.rt.core.http.pojo.RtClient
 import com.jerry.rt.core.http.protocol.RtCode
 import com.jerry.rt.core.http.request.model.MultipartFile
 import java.lang.reflect.InvocationTargetException
@@ -157,7 +158,7 @@ internal object RequestDelegator {
     }
 
 
-    internal fun onRtIn(client: Client,request: Request, response: Response) {
+    internal fun onRtIn(client: RtClient,request: Request, response: Response) {
         try {
             InjectFactory.getConfigRegisters().forEach {
                 if (!it.instance.onRtIn(client,request,response)){
@@ -169,10 +170,10 @@ internal object RequestDelegator {
         }
     }
 
-    internal fun onRtMessage(request: Request, response: Response) {
+    internal fun onRtMessage(client:RtClient,request: Request, response: Response) {
         try {
             InjectFactory.getConfigRegisters().forEach {
-                if (!it.instance.onRtMessage(request,response)){
+                if (!it.instance.onRtMessage(client,request,response)){
                     return
                 }
             }
@@ -181,7 +182,7 @@ internal object RequestDelegator {
         }
     }
 
-    internal fun onRtOut(client: Client) {
+    internal fun onRtOut(client: RtClient) {
         try {
             InjectFactory.getConfigRegisters().forEach {
                 if (!it.instance.onRtOut(client)){

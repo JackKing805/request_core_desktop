@@ -7,38 +7,39 @@ import com.cool.request_core.core.factory.InjectFactory
 import com.jerry.rt.core.http.Client
 import com.jerry.rt.core.http.pojo.Request
 import com.jerry.rt.core.http.pojo.Response
+import com.jerry.rt.core.http.pojo.RtClient
 
 @ConfigRegister(priority = -1)
 class DefaultRtConfigRegister : IConfig() {
-    private var rtClient: RtClient?=null
+    private var rtClient: RtClientHandler?=null
 
     override fun init(annotation: Configuration, clazz: Any) {
-        val bean2 = InjectFactory.getBean(RtClient::class.java)
+        val bean2 = InjectFactory.getBean(RtClientHandler::class.java)
         if (bean2!=null){
-            rtClient = bean2 as RtClient
+            rtClient = bean2 as RtClientHandler
         }
     }
 
-    override fun onRtIn(client: Client,request: Request, response: Response): Boolean {
+    override fun onRtIn(client: RtClient,request: Request, response: Response): Boolean {
         rtClient?.onRtIn(client,request,response)
         return false
     }
 
-    override fun onRtMessage(request: Request, response: Response): Boolean {
-        rtClient?.onRtMessage(request,response)
+    override fun onRtMessage(client: RtClient,request: Request, response: Response): Boolean {
+        rtClient?.onRtMessage(client,request,response)
         return false
     }
-    override fun onRtOut(client: Client): Boolean {
+    override fun onRtOut(client: RtClient): Boolean {
         rtClient?.onRtOut(client)
         return false
     }
 
-    interface RtClient{
+    interface RtClientHandler{
         fun handUrl():String
 
-        fun onRtIn(client: Client,request: Request,response: Response)
+        fun onRtIn(client: RtClient,request: Request,response: Response)
 
-        fun onRtMessage(request: Request,response: Response)
-        fun onRtOut(client: Client)
+        fun onRtMessage(client: RtClient,request: Request,response: Response)
+        fun onRtOut(client: RtClient)
     }
 }

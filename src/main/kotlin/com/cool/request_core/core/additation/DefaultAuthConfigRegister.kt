@@ -11,6 +11,7 @@ import com.cool.request_core.core.utils.reflect.InjectUtils
 import com.jerry.rt.core.http.Client
 import com.jerry.rt.core.http.pojo.Request
 import com.jerry.rt.core.http.pojo.Response
+import com.jerry.rt.core.http.pojo.RtClient
 
 @ConfigRegister(registerClass = Any::class)
 class DefaultAuthConfigRegister : IConfig() {
@@ -66,7 +67,7 @@ class DefaultAuthConfigRegister : IConfig() {
         return  true
     }
 
-    override fun onRtIn(client: Client, request: Request, response: Response): Boolean {
+    override fun onRtIn(client: RtClient, request: Request, response: Response): Boolean {
         requestInterceptorList.forEach {
             val pass = it.hand(request, response)
             if (!pass){
@@ -76,14 +77,14 @@ class DefaultAuthConfigRegister : IConfig() {
         return super.onRtIn(client, request, response)
     }
 
-    override fun onRtMessage(request: Request, response: Response): Boolean {
+    override fun onRtMessage(client:RtClient,request: Request, response: Response): Boolean {
         requestInterceptorList.forEach {
             val pass = it.hand(request, response)
             if (!pass){
                 return false
             }
         }
-        return super.onRtMessage(request, response)
+        return super.onRtMessage(client,request, response)
     }
 
     class RequestInterceptor(
